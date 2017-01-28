@@ -37,9 +37,13 @@ int main(){
 	printf("Connected to server...\n");
 
 	// post to server
-	strcpy(buffer, "POST /query_string HTTP/1.0\r\n Content-Type: text/plain\r\n Content-Length: 12\r\n \r\n query_string");
+	strcpy(buffer, "POST /?hello HTTP/1.0\r\n\r\n");
 	send(clientId, buffer, 96, 0);
 	write(clientId, buffer, 96);
+
+	// Read message from server
+	recv(clientId, buffer, 1024, 0);
+	printf("Server: %s\n", buffer);
 
 	return 0;
 }

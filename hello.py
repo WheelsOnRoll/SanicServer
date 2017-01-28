@@ -11,6 +11,7 @@ app = Sanic(__name__)
 def query_string(request):
 	print("got client")
 	print(request.query_string)
-	return json({ "parsed": True, "args": request.args, "url": request.url, "query_string": request.query_string })
+	# return json({ "parsed": True, "args": request.args, "url": request.url, "query_string": request.query_string })
+	return json({"success": True})
 
 app.run(host="127.0.0.1", port=8000, debug=True)
