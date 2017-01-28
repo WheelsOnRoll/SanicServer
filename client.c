@@ -16,7 +16,7 @@ int main(){
 	printf("Connecting...\n");
 
 	// Create client socket
-	clientId = socket(PF_INET, SOCK_STREAM, 0);
+	clientId = socket(AF_INET, SOCK_STREAM, 0);
 
 	// Set server address
 	serverAddress.sin_family = AF_INET;
@@ -27,19 +27,16 @@ int main(){
 	// Connect client to server
 	addr_size = sizeof serverAddress;
 	if(connect(clientId, (struct sockaddr *) &serverAddress, addr_size)!=0){
-		printf("Error connectoing to server!\n");
+		printf("Error connecting to server!\n");
 		return 0;
 	}
-
-	// Read message from server
-	//recv(clientId, buffer, 1024, 0);
 
 	printf("Connected to server...\n");
 
 	// post to server
-	strcpy(buffer, "POST /?hello HTTP/1.0\r\n\r\n");
-	send(clientId, buffer, 96, 0);
-	write(clientId, buffer, 96);
+	strcpy(buffer, "POST /?number=hello HTTP/1.1\r\nHost: 127.0.0.1:8000\r\n\r\n");
+	send(clientId, buffer, 54, 0);
+	// write(clientId, buffer, 96);
 
 	// Read message from server
 	recv(clientId, buffer, 1024, 0);

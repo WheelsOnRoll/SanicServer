@@ -10,6 +10,8 @@ app = Sanic(__name__)
 @app.route("/", methods=["POST",])
 def query_string(request):
 	print("got client")
+	print(request.args)
+	print(request.url)
 	print(request.query_string)
 	# return json({ "parsed": True, "args": request.args, "url": request.url, "query_string": request.query_string })
 	return json({"success": True})
